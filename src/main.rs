@@ -44,5 +44,13 @@ fn main() -> Result<(), Error> {
         );
     }
 
+    client.execute(
+        "UPDATE app_user SET username=$1 WHERE id=$2",
+        &[&"jack1", &4],
+    )?;
+
+    client.execute("DELETE FROM app_user WHERE id=$1", &[&1])?;
+    client.execute("DELETE FROM app_user WHERE id=$1", &[&3])?;
+
     Ok(())
 }
